@@ -48,7 +48,7 @@ const serializeCookie = (cookie) =>
 
 
 const getImageResponse = async (idx, gameId, cookie) => {
-    if (!idx) {
+    if (idx === undefined) {
         throw new Error('getImageResponse: idx not set');
     }
     if (!gameId) {
