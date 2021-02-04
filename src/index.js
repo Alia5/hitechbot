@@ -48,6 +48,15 @@ const serializeCookie = (cookie) =>
 
 
 const getImageResponse = async (idx, gameId, cookie) => {
+    if (!idx) {
+        throw new Error('getImageResponse: idx not set');
+    }
+    if (!gameId) {
+        throw new Error('getImageResponse: gameId not set');
+    }
+    if (!cookie) {
+        throw new Error('getImageResponse: cookie not set');
+    }
     return JSON.parse((await withHeaders(http.get(`${BASE_URL}${ENDPOINTS.IMAGE}`).query({
         id: gameId,
         clicked: idx
