@@ -9,6 +9,12 @@ const looksSame = require('looks-same');
 const FAST_COMPARE = true;
 const COMPARE_DELAY = true;
 
+const BASE_DELAY_MS = 2000;
+const ADD_DELAY_MAX_MS = 2000;
+
+const DELAY_BETWEEN_PAIRS = true;
+const HALF_DELAY_ON_SOLVE = true;
+
 const cookieString = '';
 
 const BASELINE_IMAGES_DIR = './baselineImages';
@@ -22,14 +28,17 @@ const ENDPOINTS = {
 
 const BASELINE_IMGS = [];
 
-const withHeaders = async (req, cookie) => req.set('Cookie', serializeCookie(cookie))
+const withHeaders = async (req, cookie) => {
+    const stackTrace = new Error().stack;
+    return req.set('Cookie', serializeCookie(cookie))
     .set('Host', 'matchup.hitech-gamer.com')
     .set('Referer', 'https://matchup.hitech-gamer.com/game/start')
     .set('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36')
     .set('X-Requested-With', 'XMLHttpRequest').catch((e) => {
-        console.log('Error when requesting url:', req.url);
+        console.log('Error when requesting url:', req.url, 'Stack:', stackTrace);
         throw e;
-    });
+    })
+};
     ;
 
 const serializeCookie = (cookie) => 
@@ -111,7 +120,7 @@ const findImage = async (imgBuff) => {
         return isA ? `${idx}_a` : isB ? `${idx}_b` : undefined;
     }))).filter((e) => e !== undefined);
     if (COMPARE_DELAY) {
-        await sleep(2000 + Math.round(Math.random() * 2000));
+        await sleep(BASE_DELAY_MS + Math.round(Math.random() * ADD_DELAY_MAX_MS));
     }
     return imgCode?.[0];
 };
@@ -185,6 +194,10 @@ const main = async () => {
 
         if (!isSecond) {
 
+            if (DELAY_BETWEEN_PAIRS) {
+                await sleep(BASE_DELAY_MS + Math.round(Math.random() * ADD_DELAY_MAX_MS));
+            }
+
             for (let k = 0; k < 15; k++) {
                 const v = resultMap[k.toString()];
                 if (v.a && v.b && !v.foundPair) {
@@ -194,6 +207,10 @@ const main = async () => {
                     // don't download image again, we have it already...
                     // const imageAsPng1 = await imageToPng(await loadImage(imageResponse1.image, cookie));
                     // TODO: Check what the website does.
+                    if (DELAY_BETWEEN_PAIRS) {
+                        const delayTime = BASE_DELAY_MS + Math.round(Math.random() * ADD_DELAY_MAX_MS);
+                        await sleep(HALF_DELAY_ON_SOLVE ? delayTime / 2 : delayTime);
+                    }
                     const imageResponseB = await getImageResponse(v.b, gameId, cookie);
                     console.log('imageResponse B', imageResponseB, `${k}_b`, '\n');
                     // don't download image again, we have it already...
@@ -208,6 +225,10 @@ const main = async () => {
                     if (isGameDone(imageResponseB)) {
                         console.log('SOLVED!', 'Time:', Date.now() - startTime, 'ms');
                         return;
+                    }
+                    if (DELAY_BETWEEN_PAIRS) {
+                        const delayTime = BASE_DELAY_MS + Math.round(Math.random() * ADD_DELAY_MAX_MS);
+                        await sleep(HALF_DELAY_ON_SOLVE ? delayTime / 2 : delayTime);
                     }
                 }
             }
@@ -230,6 +251,10 @@ const main = async () => {
                     throw new Error('Trying to solve while pair is already solved!');
                 }
                 console.log(`Knowing pair ${baseNum}... Solving!`);
+                if (DELAY_BETWEEN_PAIRS) {
+                    const delayTime = BASE_DELAY_MS + Math.round(Math.random() * ADD_DELAY_MAX_MS);
+                    await sleep(HALF_DELAY_ON_SOLVE ? delayTime / 2 : delayTime);
+                }
                 const imageResponse1 = await getImageResponse(resultMap[baseNum][otherChar], gameId, cookie);
                 // don't download image again, we have it already...
                 // const imageAsPng1 = await imageToPng(await loadImage(imageResponse1.image, cookie));
