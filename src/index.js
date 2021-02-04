@@ -242,6 +242,11 @@ const main = async () => {
                 }
             }
 
+            if (i < unsolvedImages.length) {
+                i = 0;
+                unsolvedImages = [...unsolvedImages].sort(() => 0.5 - Math.random())
+            }
+
             const imageResponse = await getImageResponse(unsolvedImages[i], gameId, cookie);
             const imageAsPng = await imageToPng(await loadImage(imageResponse.image, cookie));
             const baseId = await findImage(imageAsPng);
