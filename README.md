@@ -11,8 +11,10 @@ This code has been released after the challenge was finished.
 
 ## Building
 
-`$ npm run build`
+`$ npm i && npm run devbuild`
 
 ## Usage
 
-Simply install the addon and once on the game page, click the start bot button
+Load unpacked chrome extension (enable developer mode) from `dist` folder.  
+point your browser to [https://matchup.hitech-gamer.com/game/start](https://matchup.hitech-gamer.com/game/start)  
+`Run the game bicthes!`
