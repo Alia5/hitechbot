@@ -3,7 +3,6 @@ module.exports = {
         "airbnb-typescript/base",
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
-        'eslint:recommended'
     ],
     parser: '@typescript-eslint/parser',
     plugins: [
@@ -18,6 +17,9 @@ module.exports = {
         browser: true
     },
     rules: {
+        "import/export": "off",
+        "import/prefer-default-export": "off",
+        "import/named": "off",
         "indent": 0,
         "no-void": 0,
         "@typescript-eslint/indent": ["warn", 4],
