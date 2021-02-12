@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+
+  "name": "Hitech Matchup Challenge Bot",
+  "description": "Hitech Matchup Challenge Bot",
+  "version": "1.0",
+
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+
+  "content_scripts": [
+      {
+          "matches": ["https://matchup.hitech-gamer.com/game/start"],
+          "js": ["js/contentScript.js"]
+      }
+  ],
+
+  "background": {
+    "scripts": ["js/background.js"]
+  },
+
+  "permissions": [
+    "storage",
+    "<all_urls>",
+    "activeTab"
+  ]
+}
