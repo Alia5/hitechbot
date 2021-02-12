@@ -1,4 +1,4 @@
-const BUTTON_TEXT = 'Run the game Bitches!' as const;
+const BUTTON_TEXT = 'Run the game bitches!' as const;
 
 const INSERT_DIV_QUERY_SELECTOR = '#game .container .col' as const;
 

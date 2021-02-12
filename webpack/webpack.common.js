@@ -8,6 +8,7 @@ module.exports = {
     entry: {
         background: path.join(srcDir, 'background.ts'),
         contentScript: path.join(srcDir, 'contentScript.ts'),
+        webscript: path.join(srcDir, 'webscript.ts'),
     },
     output: {
         path: path.join(__dirname, '../dist/js'),

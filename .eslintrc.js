@@ -17,6 +17,7 @@ module.exports = {
         browser: true
     },
     rules: {
+        "max-len": 140,
         "import/export": "off",
         "import/prefer-default-export": "off",
         "import/named": "off",

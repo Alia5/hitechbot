@@ -1,10 +1,6 @@
-import { insertButton } from './contentSubscripts/modifyhtml';
-
-const main = () => {
-    const startButton = insertButton();
-    startButton.onclick = () => {
-        console.log('nope!');
-    };
+const s = document.createElement('script');
+s.src = chrome.runtime.getURL('js/webscript.js');
+s.onload = () => {
+    s.remove();
 };
-
-main();
+(document.head || document.documentElement).appendChild(s);

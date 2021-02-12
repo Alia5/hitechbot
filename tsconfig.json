@@ -14,7 +14,7 @@
     },
     "include": [
         "src/**/*",
-        "@types/websiteGame.d.ts"
+        "src/@types/websiteGame.d.ts"
     ],
     "exclude": [
         "node_modules"
