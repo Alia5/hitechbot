@@ -7,7 +7,7 @@ Browser addon Bot for [https://matchup.hitech-gamer.com/game/start](https://matc
 Written mostly for fun, I didn't intend to actually compete in the challenge.
 
 Hitech didn't even obfuscate their javascript-code, which was rather an invitation to create this.  
-This code has been released after the challenge was finished.  
+This code has been released after the challenge was over.  
 
 ## Building
 
